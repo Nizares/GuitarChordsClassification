@@ -28,7 +28,12 @@ karena banyak orang yang tidak bisa memainkan atau mengenali pola kunci dasar al
 ### Penjelasan DataSet
 Dari Penjelasan Diatas, Sebuah sistem akan mengenali 7 jenis atau label kunci dasar gitar yaitu :
 1. **`A`**
-    ![](https://drive.google.com/file/d/1-USnRCW16o3Y_nUcHHcIRzoZNH-WQkOF/view?usp=share_link)
+
+![]()
+<p align="center">
+  <img src="https://drive.google.com/file/d/1-USnRCW16o3Y_nUcHHcIRzoZNH-WQkOF/view?usp=share_link">
+</p>
+
 2. **`B`**
 3. **`C`**
 4. **`D`**
