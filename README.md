@@ -29,10 +29,10 @@ karena banyak orang yang tidak bisa memainkan atau mengenali pola kunci dasar al
 Dari Penjelasan Diatas, Sebuah sistem akan mengenali 7 jenis atau label kunci dasar gitar yaitu :
 1. **`A`**
 
-![]()
+<!-- ![]()
 <p align="center">
   <img src="https://drive.google.com/file/d/1-USnRCW16o3Y_nUcHHcIRzoZNH-WQkOF/view?usp=share_link">
-</p>
+</p> -->
 
 2. **`B`**
 3. **`C`**
