@@ -35,7 +35,7 @@ Dari Penjelasan Diatas, Sebuah sistem akan mengenali 7 jenis atau label kunci da
 6. **`F`**
 7. **`G`**
 
-![](images/allData.jpg)
+![](Images/allData.png)
 
 dataset disimpan di google drive @Wendra linknya [disini](https://drive.google.com/drive/folders/1h4kLXmCjUdlykKrkz9aZzFV_LxjnrMZ8)
 yang dibagi menjadi berberapa Direktori atau Folder dari Kunci A sampai G dimana sistem akan mengenali atau klasifikasi mana gambar yang merupakan kunci dasar gitar `A`, `B`, `C`, `D`, `E`, `F`, `G` 
