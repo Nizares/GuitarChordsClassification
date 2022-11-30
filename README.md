@@ -28,18 +28,14 @@ karena banyak orang yang tidak bisa memainkan atau mengenali pola kunci dasar al
 ### Penjelasan DataSet
 Dari Penjelasan Diatas, Sebuah sistem akan mengenali 7 jenis atau label kunci dasar gitar yaitu :
 1. **`A`**
-
-<!-- ![]()
-<p align="center">
-  <img src="https://drive.google.com/file/d/1-USnRCW16o3Y_nUcHHcIRzoZNH-WQkOF/view?usp=share_link">
-</p> -->
-
 2. **`B`**
 3. **`C`**
 4. **`D`**
 5. **`E`**
 6. **`F`**
 7. **`G`**
+
+![](images/allData.png)
 
 dataset disimpan di google drive @Wendra linknya [disini](https://drive.google.com/drive/folders/1h4kLXmCjUdlykKrkz9aZzFV_LxjnrMZ8)
 yang dibagi menjadi berberapa Direktori atau Folder dari Kunci A sampai G dimana sistem akan mengenali atau klasifikasi mana gambar yang merupakan kunci dasar gitar `A`, `B`, `C`, `D`, `E`, `F`, `G` 
