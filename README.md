@@ -95,7 +95,7 @@ splitfolders.ratio(
 untuk code pada visualisasi dataset Training, Validation, Testing sama seperti visualisasi semua data tapi dibedakan nama direktorinya
 
 Data Train
-![](Images/trainData.png)
+![](Images/trainingData.png)
 - Jumlah Dataset A sebanyak 140 Data Gambar
 - Jumlah Dataset B sebanyak 140 Data Gambar
 - Jumlah Dataset C sebanyak 140 Data Gambar
@@ -125,10 +125,196 @@ Data Testing
 - Jumlah Dataset G sebanyak 42 Data Gambar
 
 ### Penjelasan _Pre-Processing_
-(PENJELASAN DARI Pre-Processing SEMUA TARO DISINI)
+Pertama kita Augmentasi data Training, Validation dan Testing. augmentasi adalah proses cara untuk menambahkan data sintetik.
 
-### Penjelasan _Modelling_
-(PENJELASAN dari Modelling SEMUA TARO DISINI)
+kita membuat data generatornya terlebih dahulu sebelum di proses ke tiap direktori dengan code
+Pada data Training, Validation dan Testing terdapat perbedaan pada Augmentasi dimana.
+
+Pada Data Train Terdapat beberapa Augmentasi Gambar :
+- Penskalaan menggunakan ReScale sebanyak 1/255
+- Memutar gambar dengan kemiringan 20
+- Pencahayaan rentang dari 0.5 sampai 1 misalkan nilai kurang dari 1 lebih gelap
+- Mengatur pengskalaan gambar sebesar 0.2
+- Mengatur gambar menjadi lebih dekat rentang 0.8 sampai 1 misalkan nilai kurang dari 1 akan zoom in
+- Fambar akan diputar secara horizontal (lurus)
+- Gambar akan diputar secara vertikal (keaatas)
+
+Pada Data Validation dan Testing hanya 1 augmentasi gambar yaitu :
+- Penskalaan menggunakan ReScale sebanyak 1/255
+```python
+train_datagen = ImageDataGenerator(
+                    rescale=1./255,
+                    rotation_range=20, 
+                    brightness_range=(0.5,1.0), 
+                    shear_range=0.2, 
+                    zoom_range=(0.8,1.0), 
+                    fill_mode='nearest', 
+                    horizontal_flip=True,
+                    vertical_flip=True)
+
+val_datagen = ImageDataGenerator(rescale=1./255)
+test_datagen = ImageDataGenerator(rescale=1./255)
+```
+Setelah itu data akan dimasukkan ke dalam generator untuk di Proses Augmentasi dalam generator ada perubahan untuk gambar :
+
+- Nama masing-masing direktori ada train_dir, val_dir, test_dir
+- Resolusi gambar dirubah menjadi 150x150
+- Untuk menentukan jumlah gambar yang digunakan untuk menentukan step per training
+- untuk kelasnya kategorikal 
 
 ```python
+train_generator = train_datagen.flow_from_directory(
+    train_dir,
+    target_size=(150,150),
+    batch_size=32,
+    class_mode='categorical'
+)
+
+val_generator = val_datagen.flow_from_directory(
+    val_dir,
+    target_size=(150,150),
+    batch_size=32,
+    class_mode='categorical'
+)
+
+test_generator = test_datagen.flow_from_directory(
+    test_dir,
+    target_size=(150,150),
+    batch_size=32,
+    class_mode='categorical'
+)
 ```
+setelah itu dapat memperlihatkan gambar yang sudah di augmentasi dengan visualisasi gambar pada tiap label direktorinya
+```python
+plt.figure(figsize=(7,7))
+for i in range(9):
+  ax = plt.subplot(3, 3, i + 1)
+  plt.imshow(image[i])
+  plt.title(class_name[np.argmax(label[i])])
+  plt.axis("off")
+```
+![](Images/gambardenganlabel.png)
+
+Visualisasi gambar dengan Shape
+```python
+for _ in range(7):
+  img, label = train_generator.next() 
+  print("Ukuran gambar :",img.shape)
+  plt.imshow(img[i])
+  plt.show()
+```
+```python
+Ukuran gambar : (32, 150, 150, 3)
+```
+![](Images/gambardenganukuran.png)
+
+### Penjelasan _Modelling_
+
+Membuat model dengan layer-layer yang dibuat dibagi menjadi 3 Input Layer, Hidden Layer, Output Layer menggunakan model tipe sequential
+- Pertama Input layer
+    - Convolution filter sebanyak 32, input shape sesuai dengan gambar
+    - fungsi aktivasi ReLU membuat Neural Network menjadi non-linear untuk menghitung total dari Weight
+       - fungsi aktivasi ReLU dapat dilihat dari gabar berikut
+       ![](Images/relu.jpg)
+
+
+- Kedua Hidden Layer
+    - Pooling sebanyak 4 dengan matrix 2x2 
+    - Convolution filter yang berbeda dari 64 sampai 128 dengan matrix 3x3 dengan Aktivasi ReLu
+    - Layer Dropout 0.2 agar tidak terjadinya overfitting di atur nilai neuron nya
+    - Layer Flatten untuk reshaping menyatukan inputan yang memiliki banyak dimensi
+    - Layer Dense sebanyak 128 filter untuk saling menghubungkan antar layer
+- Ketiga Output layer
+    - Layer dense sebanyak 7 filter dan fungsi aktivasi softmax
+```python
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=(150,150,3)), #input layer
+    # Hidden Layer
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(128, activation='relu'),
+    # Hidden Layer
+    tf.keras.layers.Dense(7, activation='softmax') # output Layer
+])
+```
+Membuat fungsi callback :
+
+Akurasi pada Iterasi(epoch) diatas 20 tidak bertambah proses fitting akan seketika berhenti
+
+```python
+from keras.callbacks import EarlyStopping
+
+monitor_val_acc = EarlyStopping(monitor='accuracy',
+                  patience=6)
+```
+
+compile model untuk mengatur konfigurasi model
+- optimizer menggunakan metode Adam
+- loss menggunakan metode Categorical Crossentropy
+- kriteria berdasarkan 
+    - akurasi dimana akurasi pasti ada loss
+    - recall
+    - precision
+
+```python
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy', 
+              metrics=['accuracy', tf.keras.metrics.Recall(), tf.keras.metrics.Precision()])
+```
+Melatih data dengan menambahkan data yang sudah di augmentasi dengan iterasi(epoch) sebanyak 30, dan validation data sesuai dengan data validation yang sudah di augmentasi, dan fungsi callback untuk memanggil fungsi perubahan EarlyStopping
+```python
+history = model.fit(
+    train_generator,
+    epochs=30,
+    validation_data=val_generator,
+    callbacks=[monitor_val_acc]
+)
+```
+
+#### Visualiasi Accuracy, Loss, Recall, Precision
+
+memanggil fungsi panjang dari history dari akurasi/loss/recall/precision atau epochnya untuk dijadikan sumbu x
+
+
+memanggil fungsi history dari akurasi/loss/recall/precision untuk dijadikan sumbu y
+
+```python
+plt.figure(1, figsize=(10,10))
+plt.plot(range(len(history.history['accuracy'])), #'loss' /'recall' / 'precision'
+         history.history['accuracy'], 
+         'co-',
+         label='training')
+plt.plot(range(len(history.history['val_accuracy'])), 
+         history.history['val_accuracy'],
+         'bD--',
+         label='validation')
+plt.title('Training & Validation Accuracy')
+plt.legend()
+plt.xlabel("Epochs")
+plt.ylabel("Accuracy")
+plt.show()
+```
+
+![](Images/trainValAcc.png)
+
+penjelasan gambar diatas
+
+![](Images/trainValLoss.png)
+
+penjelasan gambar diatas
+
+![](Images/trainValRec.png)
+
+penjelasan gambar diatas
+
+![](Images/trainValPre.png)
+
+penjelasan gambar diatas
+
