@@ -57,7 +57,7 @@ Kelompok Kami Mencoba Klasifikasi Gambar atau Citra untuk mengenali pola kunci d
 
 karena banyak orang yang tidak bisa memainkan atau mengenali pola kunci dasar alat musik gitar(termasuk penulis readme.md ini :v)  karena itu kami akan mencoba membuat sebuah projek atau program yang membuat sebuah Kecerdasan Buatan / _Artificial Intellegence_ akan melakukan klasifikasi, mengenali pola Kunci Dasar Gitar yang berupa Gambar atau Citra.
 
-## Penjelasan DataSet
+## 1. Penjelasan DataSet
 [Link Dataset _GuitarChordsClassification_](https://drive.google.com/drive/folders/1h4kLXmCjUdlykKrkz9aZzFV_LxjnrMZ8)
 
 
@@ -159,7 +159,7 @@ Data Testing
 - Jumlah Dataset F sebanyak 42 Data Gambar
 - Jumlah Dataset G sebanyak 39 Data Gambar
 
-## Penjelasan _Pre-Processing_
+## 2. Penjelasan _Pre-Processing_
 Pertama kita Augmentasi data Training, Validation dan Testing. augmentasi adalah proses cara untuk menambahkan data sintetik.
 
 kita membuat data generatornya terlebih dahulu sebelum di proses ke tiap direktori dengan code
@@ -243,7 +243,7 @@ Ukuran gambar : (32, 150, 150, 3)
 ```
 ![](Images/gambardenganukuran.png)
 
-## Penjelasan _Modelling_
+## 3. Penjelasan _Modelling_
 
 Membuat model dengan layer-layer yang dibuat dibagi menjadi 3 Input Layer, Hidden Layer, Output Layer menggunakan model tipe sequential
 - Pertama Input layer
@@ -431,7 +431,7 @@ while (j < 4):
 ```
 ![](Images/gambarprediksisalah.png)
 
-### Prediksi secara langsung(LIVE)
+## 4. Prediksi secara langsung(LIVE)
 Mencoba Prediksi dari Gambar yang diambil dari direktori dalam device
 
 import tkinter untuk function mengambil gambar dari direktori
