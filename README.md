@@ -71,7 +71,7 @@ plt.show()
 - Jumlah Dataset D sebanyak 205 Data Gambar
 - Jumlah Dataset E sebanyak 200 Data Gambar
 - Jumlah Dataset F sebanyak 203 Data Gambar
-- Jumlah Dataset G sebanyak 203 Data Gambar
+- Jumlah Dataset G sebanyak 191 Data Gambar
 
 
 sebelum itu, harus membagi direktori Training, Validation, dan Testing
@@ -102,7 +102,7 @@ Data Train
 - Jumlah Dataset D sebanyak 142 Data Gambar
 - Jumlah Dataset E sebanyak 140 Data Gambar
 - Jumlah Dataset F sebanyak 141 Data Gambar
-- Jumlah Dataset G sebanyak 141 Data Gambar
+- Jumlah Dataset G sebanyak 132 Data Gambar
 
 Data Validation
 ![](Images/validationData.png)
@@ -112,7 +112,7 @@ Data Validation
 - Jumlah Dataset D sebanyak 20 Data Gambar
 - Jumlah Dataset E sebanyak 20 Data Gambar
 - Jumlah Dataset F sebanyak 20 Data Gambar
-- Jumlah Dataset G sebanyak 20 Data Gambar
+- Jumlah Dataset G sebanyak 18 Data Gambar
 
 Data Testing
 ![](Images/testingData.png)
@@ -122,7 +122,7 @@ Data Testing
 - Jumlah Dataset D sebanyak 42 Data Gambar
 - Jumlah Dataset E sebanyak 41 Data Gambar
 - Jumlah Dataset F sebanyak 42 Data Gambar
-- Jumlah Dataset G sebanyak 42 Data Gambar
+- Jumlah Dataset G sebanyak 39 Data Gambar
 
 ### Penjelasan _Pre-Processing_
 Pertama kita Augmentasi data Training, Validation dan Testing. augmentasi adalah proses cara untuk menambahkan data sintetik.
@@ -136,7 +136,7 @@ Pada Data Train Terdapat beberapa Augmentasi Gambar :
 - Pencahayaan rentang dari 0.5 sampai 1 misalkan nilai kurang dari 1 lebih gelap
 - Mengatur pengskalaan gambar sebesar 0.2
 - Mengatur gambar menjadi lebih dekat rentang 0.8 sampai 1 misalkan nilai kurang dari 1 akan zoom in
-- Fambar akan diputar secara horizontal (lurus)
+- Gambar akan diputar secara horizontal (lurus)
 - Gambar akan diputar secara vertikal (keaatas)
 
 Pada Data Validation dan Testing hanya 1 augmentasi gambar yaitu :
@@ -215,6 +215,7 @@ Membuat model dengan layer-layer yang dibuat dibagi menjadi 3 Input Layer, Hidde
     - Convolution filter sebanyak 32, input shape sesuai dengan gambar
     - fungsi aktivasi ReLU membuat Neural Network menjadi non-linear untuk menghitung total dari Weight
        - fungsi aktivasi ReLU dapat dilihat dari gabar berikut
+
        ![](Images/relu.jpg)
 
 
@@ -304,17 +305,51 @@ plt.show()
 
 ![](Images/trainValAcc.png)
 
-penjelasan gambar diatas
+Dari gambar visualisasi untuk akurasi dari Training dan Validation dapat disimpulkan bahwa :
+- Akurasi training sebesar 0.94 lebih tinggi dari pada Validation yang hanya sebesar 0.91 (ini wajar, karena selayaknya kita mempelajari sesuatu)
+- Akurasi pada validation 2x mengalami penurunan yang drastis pada iterasi(epoch) ke-4 dan epoch ke-25
+
 
 ![](Images/trainValLoss.png)
 
-penjelasan gambar diatas
+Dari gambar visualisasi untuk loss dari Training dan Validation dapat disimpulkan bahwa :
+- Loss Training sebesar 0.18 lebih rendah dari pada validation yang sebesar 0.37
+- Loss pada validation 2x mengalami mengalami kenaikan karena disusuli oleh akurasi tiap akurasinya menurun drastis loss akan naik juga secara drastis
+
+Sebelum ke Visualisasi Recall dan Precision, kita harus tahu Recall dan Precision itu apa dan apa hubungannya sama akurasi
+
+- Recall bisa disebut mengingat kembali adalah tingkat keberhasilan sistem dalam menemukan kembali sebuah informasi
+
+    misalkan :
+
+    kita sudah memberitahu sebuah sistem ini adalah Kunci G, setelah itu kita memberikan gambar yang kita tidak mengasih labelnya lalu sistem atau AI akan belajar kembali lalu dia berhasil mengenali ini adalah Kunci G, nilai dari recall akan menentukan berhasilmyya sistem mengenali kembali tapi tidak ada labelnya ini adalah Kunci G.
+ 
+- Precision atau presisi adalah tingkat ketepatan antara informasi(dataset) yang diminta oleh pengguna(kita) dengan jawaban yang diberikan oleh sistem.
+
+    misalkan : 
+
+    Kita memberi tahu ini adalah kunci A dan sistem atau AI akan mengenali ini adalah kunci A, ketika berhasil nilai precision akan menentukan berhasilnya sistem mengenali ini adalah kunci A.
+
+akurasi sangat berkaitan dengan kedua hal tersebut khususnya Precision karena ketika suatu sistem tidak bisa mengenali datset dengan tepat akurasinya akan menurun.
 
 ![](Images/trainValRec.png)
 
-penjelasan gambar diatas
+Dari gambar visualisasi untuk Recall dapat disimpulkan bahwa Recall pada Training sebesar 0.92 sedangkan pada Validation seebesar 0.91
 
 ![](Images/trainValPre.png)
 
-penjelasan gambar diatas
+Dari gambar Visualisasi untuk Precision dari Training dan Validation dapat disimpulkan bahwa :
+- Precision pada Training sebesar 0.94 sedangkan pada Validation sebesar 0.91
+- Precision pada Iterasi ke-3 sd 4 mengalami penurunan yang drastis karena itu akurasi pada Iterasi 4 juga ikut menurun secara drastis, berlaku juga pada iterasi ke-25
 
+Evaluasi Hasil Akurasi dan Loss dari Training dan Validation menggunakan Evaluate
+
+- 
+
+
+```python
+test_evaluate = model.evaluate(test_generator, verbose=0)
+
+print(f'Test loss     : {test_evaluate[0]}')
+print(f'Test accuracy : {round(test_evaluate[1],2)}') 
+```
