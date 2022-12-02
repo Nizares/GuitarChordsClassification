@@ -11,7 +11,14 @@
         </a>
         <a>
             <img src="Images/labif.png" alt="unmul" height="100">
-        </a>
+        </a><br><br>
+        <div align="center">
+            <p style="font-size: 18px;">
+                Program Studi Informatika<br>
+                Fakultas Teknik<br>
+                Universitas Mulawarman
+            </p>
+        </div>
     </div>
 </div>
 
@@ -19,13 +26,13 @@
     <div>
         <p><h2>Halo Semua!, Hello everyone!, Hola Amigo!, みなさんこんにちは!, 안녕하세요 여러분!,  👋👋<h2>
         <p><h4>Kami dari Kelompok 3 Kelas B1 2020 adalah Praktikan yang membuat Tugas Proyek Akhir Praktikum Kecerdasan Buatan 🤖 Kelompok Kami yang berangottakan,</h4></p>
-        <p><h3>
-            <ol style="list-style-type: none">
-                <li>Raymond Jonathan Damanik 2009106057</li>
-                <li>Muhammad Wendra Suryananda 2009106056</li>
-                <li>Muhammad Nizar 2009106059</li>
-            </ol>
-        <h3></p>
+        <div>
+            <p><h3>
+                Raymond Jonathan Damanik 2009106057 (Ketua)<br>
+                Muhammad Wendra Suryananda 2009106056<br>
+                Muhammad Nizar 2009106059
+            </h3></p>
+        </div>
     </div>
 </div>
 
@@ -479,7 +486,6 @@ ter-Prediksi BENAR
     <h1>AKHIR dari Readme<br><b>Guitar Chords Classification🎸</b></h1>
     <div>
         <p><h2>Terimakasih!!, Thank You!!, Gracias!!, ありがとう!!, 감사해요!! 🙏🙏<h2>
-        <p><h3>Telah membacanya<h3></p>
-        <p><h3>Semoga Bermanfaat untuk Kita Semua<h3></p>
+        <p><h3>Telah membacanya,<br>Semoga Bermanfaat untuk Kita Semua<h3></p>
     </div>
 </div>
