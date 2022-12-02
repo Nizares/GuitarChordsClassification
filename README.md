@@ -344,12 +344,106 @@ Dari gambar Visualisasi untuk Precision dari Training dan Validation dapat disim
 
 Evaluasi Hasil Akurasi dan Loss dari Training dan Validation menggunakan Evaluate
 
-- 
+- Evaluasi Bagian Testing Loss dengan memanggil Evaluate Index 0
+- Evaluasi Bagian Testing Accuracy dengan memanggil Evaluate Index 1 dan di bulatkan jadi 2 angka di belakang koma
 
-
+#### Evaluate
 ```python
 test_evaluate = model.evaluate(test_generator, verbose=0)
 
 print(f'Test loss     : {test_evaluate[0]}')
 print(f'Test accuracy : {round(test_evaluate[1],2)}') 
 ```
+
+### Prediksi Hasil melalui Testing
+Memperlihatkan Visualisasi hasil prediksi yang benar dan yang salah menggunakan model yang di buat diatas
+
+#### Prediksi Hasil yang benar
+- memanggil hasil testing untuk gambar dan label awal
+- membuat hasil prediksi memanggil dari model yang telah terprediksi
+```python
+image ,label = next(iter(test_generator))
+
+plt.figure(figsize=(15,10))
+for i in range(9) :
+    TrueLabel = class_name[np.argmax(label[i])]
+    plt.subplot(3,3,i+1)
+    plt.axis('off')
+    y_pred = np.argmax(model.predict(image[i][None,...],verbose=0))
+    plt.imshow(tf.squeeze(image[i]))
+    plt.title(f'label: {TrueLabel}, predict : {class_name[y_pred]}')
+```
+![](Images/gambarprediksibenar.png)
+
+#### Prediksi Hasil yang salah
+- memanggil hasil testing untuk gambar dan label awal
+- membuat hasil prediksi memanggil dari model yang telah terprediksi tetapi dibuat kondisi ketika tidak sesuai dengan predict akan ditampilkan
+```python
+#Plot prediction Error
+image ,label = next(iter(test_generator))
+plt.figure(figsize=(15,10))
+i,j = 0,0
+while (j < 4):
+    TrueLabel = class_name[np.argmax(label[i])]
+    plt.subplot(2,2,j+1)
+    plt.axis('off')
+    y_pred = np.argmax(model.predict(image[i][None,...],verbose=0))
+    if (TrueLabel != class_name[y_pred]):
+        plt.imshow(tf.squeeze(image[i]))
+        plt.title(f'label: {TrueLabel}, predict : {class_name[y_pred]}')
+        j+=1
+    i+=1
+```
+![](Images/gambarprediksisalah.png)
+
+### Prediksi secara langsung(LIVE)
+Mencoba Prediksi dari Gambar yang diambil dari direktori dalam device
+
+import tkinter untuk function mengambil gambar dari direktori
+```python
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+from keras.preprocessing import image
+import matplotlib.image as mpimg
+```
+
+- memanggil fungsi dari tkinter untuk mengambil gambar dan sizenya dirubah menjadi 150x150
+- itu merubah gambar menjadi array untuk diprediksi
+- memanggil class sesuai dengan hasil akhir
+```python
+filename = askopenfilename()
+img = tf.keras.utils.load_img(filename, target_size=(150, 150))
+imgplot = plt.imshow(img)
+x = tf.keras.preprocessing.image.img_to_array(img)
+x = np.expand_dims(x, axis=0)
+
+
+image = np.vstack([x])
+classes = model.predict(image, batch_size=32)
+
+print(filename)
+if classes[0][0] == 1:
+  print('A')
+elif classes[0][1] == 1:
+  print('B')
+elif classes[0][2] == 1:
+  print('C')
+elif classes[0][3] == 1:
+  print('D')
+elif classes[0][4] == 1:
+  print('E')
+elif classes[0][5] == 1:
+  print('F')
+else:
+  print('G')
+```
+
+![](Images/inputprediksi.png)
+
+```python
+1/1 [==============================] - 0s 36ms/step
+C:/FILE SEB INSTALL ULANG 7 6 2021/KULIAH/Semester 5/Kecerdasan Buatan/Praktikum KB/Projek Akhir/GuitarChordsClassification/ready_dataset/test/F/IMG_1140.jpeg
+F
+```
+ter-Prediksi BENAR
+
