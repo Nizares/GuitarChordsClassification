@@ -1,9 +1,34 @@
-# GuitarChordsClassification 🎸
 
-[Link Dataset _GuitarChordsClassification_](https://drive.google.com/drive/folders/1h4kLXmCjUdlykKrkz9aZzFV_LxjnrMZ8)
+<div align="center">
+    <h1>PROYEK AKHIR<br><b>Guitar Chords Classification🎸</b></h1><br>
+    <div>
+        <a>
+            <img src="Images/unmul.png" height="150">
+        </a>
+        <p><h2>Presented for :<h2></p>
+        <a>
+            <img src="Images/ascii.png" height="100">
+        </a>
+        <a>
+            <img src="Images/labif.png" alt="unmul" height="100">
+        </a>
+    </div>
+</div>
 
-### Halo Semua!, Hello everyone!, Hola Amigo!, みなさんこんにちは!, 안녕하세요 여러분!,  👋👋 
-### Kami dari Kelompok 3 Kelas B1 2020 adalah Praktikan yang membuat Tugas Proyek Akhir Praktikum Kecerdasan Buatan 🤖🤖 Kelompok Kami yang berangottakan,
+<div align="center">
+    <div>
+        <p><h2>Halo Semua!, Hello everyone!, Hola Amigo!, みなさんこんにちは!, 안녕하세요 여러분!,  👋👋<h2>
+        <p><h4>Kami dari Kelompok 3 Kelas B1 2020 adalah Praktikan yang membuat Tugas Proyek Akhir Praktikum Kecerdasan Buatan 🤖 Kelompok Kami yang berangottakan,</h4></p>
+        <p><h3>
+            <ol style="list-style-type: none">
+                <li>Raymond Jonathan Damanik 2009106057</li>
+                <li>Muhammad Wendra Suryananda 2009106056</li>
+                <li>Muhammad Nizar 2009106059</li>
+            </ol>
+        <h3></p>
+    </div>
+</div>
+
 
 #### - Raymond Jonathan Damanik / _2009106057_ 
 [![raymond](https://github.com/kmyk/online-judge-template-generator/workflows/test/badge.svg)](https://github.com/Raymond211101)
@@ -25,7 +50,10 @@ Kelompok Kami Mencoba Klasifikasi Gambar atau Citra untuk mengenali pola kunci d
 
 karena banyak orang yang tidak bisa memainkan atau mengenali pola kunci dasar alat musik gitar(termasuk penulis readme.md ini :v)  karena itu kami akan mencoba membuat sebuah projek atau program yang membuat sebuah Kecerdasan Buatan / _Artificial Intellegence_ akan melakukan klasifikasi, mengenali pola Kunci Dasar Gitar yang berupa Gambar atau Citra.
 
-### Penjelasan DataSet
+## Penjelasan DataSet
+[Link Dataset _GuitarChordsClassification_](https://drive.google.com/drive/folders/1h4kLXmCjUdlykKrkz9aZzFV_LxjnrMZ8)
+
+
 Dari Penjelasan Diatas, Sebuah sistem akan mengenali 7 jenis atau label kunci dasar gitar yaitu :
 1. **`A`**
 2. **`B`**
@@ -124,7 +152,7 @@ Data Testing
 - Jumlah Dataset F sebanyak 42 Data Gambar
 - Jumlah Dataset G sebanyak 39 Data Gambar
 
-### Penjelasan _Pre-Processing_
+## Penjelasan _Pre-Processing_
 Pertama kita Augmentasi data Training, Validation dan Testing. augmentasi adalah proses cara untuk menambahkan data sintetik.
 
 kita membuat data generatornya terlebih dahulu sebelum di proses ke tiap direktori dengan code
@@ -208,7 +236,7 @@ Ukuran gambar : (32, 150, 150, 3)
 ```
 ![](Images/gambardenganukuran.png)
 
-### Penjelasan _Modelling_
+## Penjelasan _Modelling_
 
 Membuat model dengan layer-layer yang dibuat dibagi menjadi 3 Input Layer, Hidden Layer, Output Layer menggunakan model tipe sequential
 - Pertama Input layer
@@ -447,3 +475,11 @@ F
 ```
 ter-Prediksi BENAR
 
+<div align="center">
+    <h1>AKHIR dari Readme<br><b>Guitar Chords Classification🎸</b></h1>
+    <div>
+        <p><h2>Terimakasih!!, Thank You!!, Gracias!!, ありがとう!!, 감사해요!! 🙏🙏<h2>
+        <p><h3>Telah membacanya<h3></p>
+        <p><h3>Semoga Bermanfaat untuk Kita Semua<h3></p>
+    </div>
+</div>
