@@ -473,7 +473,8 @@ else:
   print('G')
 ```
 
-![](Images/Inputprediksi.png)
+![](Images/inputprediksi.png)
+
 
 ```python
 1/1 [==============================] - 0s 36ms/step
