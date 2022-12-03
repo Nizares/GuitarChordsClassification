@@ -473,7 +473,7 @@ else:
   print('G')
 ```
 
-![](Images/inputprediksi.png)
+![](Images/InputPrediksi.png)
 
 
 ```python
