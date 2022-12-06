@@ -5,7 +5,7 @@
         <a>
             <img src="Images/unmul.png" height="150">
         </a>
-        <p><h2>Presented for :<h2></p>
+        <p><h2>Presented for :</h2></p>
         <a>
             <img src="Images/ascii.png" height="100">
         </a>
